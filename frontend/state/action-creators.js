@@ -1,7 +1,16 @@
 // ❗ You don't need to add extra action creators to achieve MVP
-export function moveClockwise() { }
+export const MOVE_CLOCKWISE = "MOVE_CLOCKWISE";
+export const MOVE_COUNTERCLOCKWISE = "MOVE_COUNTERCLOCKWISE"
 
-export function moveCounterClockwise() { }
+
+
+export function moveClockwise() {
+  return({type: MOVE_CLOCKWISE})
+ }
+
+export function moveCounterClockwise() {
+  return({type: MOVE_COUNTERCLOCKWISE})
+ }
 
 export function selectAnswer() { }
 

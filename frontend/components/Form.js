@@ -1,14 +1,17 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import * as actionCreators from '../state/action-creators'
+import { inputChange } from '../state/action-creators'
+
 
 export function Form(props) {
 
   const onChange = evt => {
+    dispatch(inputChange(value))
 
   }
 
   const onSubmit = evt => {
+    evt.preventDefault();
 
   }
 

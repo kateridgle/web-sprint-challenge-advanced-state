@@ -1,12 +1,12 @@
 import {useEffect, React} from 'react';
-import { setQuiz, selectAnswer, fetchQuiz, postAnswer, postQuiz } from '../state/action-creators';
+import * as actionCreators from '../state/action-creators'
 
 import {connect} from 'react-redux';
 
 
 
 function Quiz(props) {
-  const {selectAnswer, fetchQuiz, postQuiz, postAnswer}=props;
+  const {selectAnswer, fetchQuiz, postQuiz, postAnswer, setQuiz}=props;
   return (
     <div id="wrapper">
       {
@@ -17,7 +17,8 @@ function Quiz(props) {
 
             <div id="quizAnswers">
               <div className="answer selected">
-                A function
+                A function 
+                {/* quiz info as prop to change question? */}
                 <button>
                   SELECTED
                 </button>

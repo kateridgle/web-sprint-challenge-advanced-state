@@ -4,7 +4,7 @@ import * as actionCreators from '../state/action-creators'
 
 
 export function Form(props) {
-  const {} = props;
+  const {dispatch, inputChange, resetForm, value} = props;
 
   const onChange = evt => {
     dispatch(inputChange(value))

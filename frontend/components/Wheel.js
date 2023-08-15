@@ -1,5 +1,5 @@
 import React from 'react'
-import { moveClockwise, moveCounterClockwise } from '../state/action-creators'
+import * as actionCreators from '../state/action-creators'
 import { connect } from 'react-redux';
 
 function Wheel(props) {
@@ -33,7 +33,9 @@ function Wheel(props) {
   )
 }
 const mapStateToProps = (state) => {
-  return {index: state.index}
+  return {
+    ...state,
+    index: state.index}
 }
 
 export default connect(mapStateToProps)(Wheel);

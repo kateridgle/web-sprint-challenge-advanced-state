@@ -6,7 +6,7 @@ const initialWheelState = 0
 function wheel(state = initialWheelState, action) {
   switch(action.type){
     case types.MOVE_CLOCKWISE:
-      if(state.index < 6 || state.index > 0){
+      if(state.index < 6 ){
         return state.index + 1
       }
       else {

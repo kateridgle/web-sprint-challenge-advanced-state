@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 
 
 function Quiz(props) {
-  const {selectAnswer}=props;
+  const {selectAnswer, fetchQuiz, postQuiz, postAnswer}=props;
   return (
     <div id="wrapper">
       {

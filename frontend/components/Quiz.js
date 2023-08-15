@@ -1,7 +1,12 @@
-import React from 'react'
+import {useEffect, React} from 'react';
+import { setQuiz, selectAnswer, fetchQuiz, postAnswer, postQuiz } from '../state/action-creators';
 
-export default function Quiz(props) {
-  const {}=props;
+import {connect} from 'react-redux';
+
+
+
+function Quiz(props) {
+  const {selectAnswer}=props;
   return (
     <div id="wrapper">
       {
@@ -34,3 +39,9 @@ export default function Quiz(props) {
     </div>
   )
 }
+
+const mapStateToProps = state => {
+
+}
+
+export default connect(mapStateToProps)(Quiz);

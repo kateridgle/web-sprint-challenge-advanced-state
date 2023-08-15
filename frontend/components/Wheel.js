@@ -1,14 +1,16 @@
 import React from 'react'
 import { moveClockwise } from '../state/action-creators'
+import { connect } from 'react-redux';
 
-export default function Wheel(props) {
+function Wheel(props) {
+  const {index} = props;
   const handleClick = (evt) =>{
     dispatch(moveClockwise());
   }
   return (
     <div id="wrapper">
       <div id="wheel">
-        <div className="cog active" style={{ "--i": 0 }}>B</div>
+        <div className="cog active" style={{ "--i": 0 }}>{props.index}</div>
         <div className="cog" style={{ "--i": 1 }}></div>
         <div className="cog" style={{ "--i": 2 }}></div>
         <div className="cog" style={{ "--i": 3 }}></div>
@@ -22,3 +24,8 @@ export default function Wheel(props) {
     </div>
   )
 }
+const mapStateToProps = (state) => {
+  return state.index
+}
+
+export default connect(mapStateToProps)(Wheel);

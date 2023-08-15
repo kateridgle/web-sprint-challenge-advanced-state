@@ -1,6 +1,7 @@
 import React from 'react'
 
 export default function Quiz(props) {
+  const {}=props;
   return (
     <div id="wrapper">
       {
@@ -16,6 +17,7 @@ export default function Quiz(props) {
                   SELECTED
                 </button>
               </div>
+              {/* needs to be changed with props. */}
 
               <div className="answer">
                 An elephant

@@ -1,9 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { inputChange } from '../state/action-creators'
+import * as actionCreators from '../state/action-creators'
 
 
 export function Form(props) {
+  const {} = props;
 
   const onChange = evt => {
     dispatch(inputChange(value))

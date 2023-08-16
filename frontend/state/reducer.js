@@ -7,14 +7,23 @@ function wheel(state = initialWheelState, action) {
   switch(action.type){
     case types.MOVE_CLOCKWISE:
       if(state.index < 6 ){
-        return state.index + 1
+        return {
+          ...state,
+          index: (state.index + 1) % 5
+        }
       }
       else {
-        return 0
+        return {
+          ...state,
+          index: 0
+        }
       } 
     case types.MOVE_COUNTERCLOCKWISE:
       if(state.index > 0 || state.index < 6) {
-        return state.index - 1
+        return {
+          ...state,
+          index: (state.index - 1) % 5
+        }
       } else {
         return 5
       }
@@ -26,8 +35,7 @@ function wheel(state = initialWheelState, action) {
 const initialQuizState = null
 function quiz(state = initialQuizState, action) {
   switch(action.type){
-    case types.SET_QUIZ_INTO_STATE:
-    case types.SET_SELECTED_ANSWER: 
+    case types.SET_QUIZ_INTO_STATE: 
   }
   return state
 }
@@ -36,7 +44,10 @@ const initialSelectedAnswerState = null
 function selectedAnswer(state = initialSelectedAnswerState, action) {
   switch(action.type) {
     case types.SET_SELECTED_ANSWER:
-      return state.selectedAnswer //answer or answer selected from quiz.js
+      return {
+        ...state,
+        answer: state.selectedAnswer,
+       } //answer or answer selected from quiz.js
   }
   return state
 }
@@ -45,7 +56,10 @@ const initialMessageState = ''
 function infoMessage(state = initialMessageState, action) {
   switch(action.type){
     case types.SET_INFO_MESSAGE:
-      return state.message //default?
+      return {
+        ...state,
+        message: state.message,
+       } //default?
   }
   return state
 }
@@ -58,8 +72,10 @@ const initialFormState = {
 function form(state = initialFormState, action) {
   switch(action.type){
     case types.INPUT_CHANGE:
-      return 
-        state.value
+      return {
+        ...state,
+        input: state.value
+      }
     case types.RESET_FORM:
       return initialFormState
       

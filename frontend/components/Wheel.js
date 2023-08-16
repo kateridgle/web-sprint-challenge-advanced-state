@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 function Wheel(props) {
   const {index, moveClockwise, moveCounterClockwise} = props;
+  console.log(props);
   const handleClick = (evt) =>{
     if (evt.target.id === "clockwiseBtn"){
       moveClockwise();

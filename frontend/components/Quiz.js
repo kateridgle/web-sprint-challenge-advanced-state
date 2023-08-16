@@ -7,6 +7,11 @@ import {connect} from 'react-redux';
 
 function Quiz(props) {
   const {selectAnswer, fetchQuiz, postQuiz, postAnswer, setQuiz}=props;
+
+  useEffect(()=>{
+    fetchQuiz()
+  }, [])
+
   return (
     <div id="wrapper">
       {
@@ -44,5 +49,7 @@ function Quiz(props) {
 const mapStateToProps = state => {
 
 }
+
+//mapActionToProps????????????????????
 
 export default connect(mapStateToProps)(Quiz);

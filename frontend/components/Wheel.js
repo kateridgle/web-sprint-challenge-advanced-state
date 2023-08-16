@@ -33,9 +33,9 @@ function Wheel(props) {
   )
 }
 const mapStateToProps = (state) => {
-  return {
+  return ({
     ...state,
-    index: state.index}
+    index: state.index})
 }
 
 export default connect(mapStateToProps)(Wheel);

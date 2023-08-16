@@ -11,12 +11,12 @@ function wheel(state = initialWheelState, action) {
       }
       else {
         return 0
-      } //check to see if 6
+      } 
     case types.MOVE_COUNTERCLOCKWISE:
       if(state.index > 0 || state.index < 6) {
         return state.index - 1
       } else {
-        return 6
+        return 5
       }
        
   }

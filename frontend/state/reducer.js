@@ -27,6 +27,7 @@ const initialQuizState = null
 function quiz(state = initialQuizState, action) {
   switch(action.type){
     case types.SET_QUIZ_INTO_STATE:
+    case types.SET_SELECTED_ANSWER: 
   }
   return state
 }
@@ -55,6 +56,14 @@ const initialFormState = {
   newFalseAnswer: '',
 }
 function form(state = initialFormState, action) {
+  switch(action.type){
+    case types.INPUT_CHANGE:
+      return 
+        state.value
+    case types.RESET_FORM:
+      return initialFormState
+      
+  }
   return state
 }
 

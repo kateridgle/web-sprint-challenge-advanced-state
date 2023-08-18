@@ -5,15 +5,13 @@ import * as actionCreators from '../state/action-creators'
 
 function Wheel(props) {
   const {index, moveClockwise, moveCounterClockwise} = props;
-  console.log(props);
-  const handleClick = (evt) =>{
-    if (evt.target.id === "clockwiseBtn"){
+  // console.log(props);
+  const handleClick = (e) =>{
       moveClockwise();
-    }
+    
   }
   
-  const handleCounterClick = evt => {
-    if (evt.target.id === "counterClockwiseBtn"){
+  const handleCounterClick = () => {
       moveCounterClockwise();
     }
   }

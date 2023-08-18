@@ -9,7 +9,7 @@ function Quiz(props) {
   const {selectAnswer, fetchQuiz, postQuiz, postAnswer, setQuiz}=props;
 
   useEffect(()=>{
-    fetchQuiz()
+    // if answer submited fetchQuiz();
   }, [])
 
   return (

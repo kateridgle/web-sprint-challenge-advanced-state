@@ -7,12 +7,14 @@ export function Form(props) {
   const {dispatch, inputChange, resetForm, value} = props;
 
   const onChange = evt => {
-    dispatch(inputChange(value))
+    inputChange(value)
 
   }
 
   const onSubmit = evt => {
     evt.preventDefault();
+    //post newform to quiz ?dispatch?
+    //resetForm()
 
   }
 

@@ -18,8 +18,10 @@ const initialQuizState = null
 function quiz(state = initialQuizState, action) {
   switch (action.type) {
     case types.SET_QUIZ_INTO_STATE:
+      //look in module 4??
+    default:
+      return state;
   }
-  return state
 }
 
 const initialSelectedAnswerState = null
@@ -28,10 +30,11 @@ function selectedAnswer(state = initialSelectedAnswerState, action) {
     case types.SET_SELECTED_ANSWER:
       return {
         ...state,
-        answer: state.selectedAnswer,
+        answer: answer,
       } //answer or answer selected from quiz.js
+    default: 
+      return state;
   }
-  return state
 }
 
 const initialMessageState = ''

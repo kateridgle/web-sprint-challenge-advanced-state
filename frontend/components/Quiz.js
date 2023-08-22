@@ -46,10 +46,5 @@ function Quiz(props) {
   )
 }
 
-const mapStateToProps = state => {
 
-}
-
-//mapActionToProps????????????????????
-
-export default connect(mapStateToProps)(Quiz);
+export default connect(st => st, actionCreators)(Quiz)

@@ -15,4 +15,4 @@ const mapStateToProps = (state) => {
   })
 }
 
-export default connect(mapStateToProps)(Message)
+export default connect(st => st, actionCreators)(Message)

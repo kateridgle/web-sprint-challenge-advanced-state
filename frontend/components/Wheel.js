@@ -5,16 +5,7 @@ import * as actionCreators from '../state/action-creators'
 
 function Wheel(props) {
   const {index, moveClockwise, moveCounterClockwise} = props;
-  // console.log(props);
-  const handleClick = (e) =>{
-      moveClockwise();
-    
-  }
-  
-  const handleCounterClick = () => {
-      moveCounterClockwise();
-    }
-  }
+  ;
   return (
     <div id="wrapper">
       <div id="wheel">
@@ -26,16 +17,11 @@ function Wheel(props) {
         <div className="cog" style={{ "--i": 5 }}>{index}</div>{/* --i is a custom CSS property, no need to touch that nor the style object */}
       </div>
       <div id="keypad">
-        <button onClick={handleCounterClick} id="counterClockwiseBtn" >Counter clockwise</button>
-        <button onClick={handleClick} id="clockwiseBtn">Clockwise</button>
+        <button onClick={moveCounterClockwise()} id="counterClockwiseBtn" >Counter clockwise</button>
+        <button onClick={moveClockwise()} id="clockwiseBtn">Clockwise</button>
       </div>
     </div>
   )
 }
-const mapStateToProps = (state) => {
-  return ({
-    ...state,
-    index: state.index})
-}
 
-export default connect(mapStateToProps, {moveClockwise, moveCounterClockwise})(Wheel);
+export default connect(st => st, actionCreators)(Wheel)

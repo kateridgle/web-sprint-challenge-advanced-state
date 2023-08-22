@@ -18,8 +18,7 @@ export function selectAnswer() {
 }
 
 export function setMessage() { //pass payload data as message??
-  return({type: type.SET_INFO_MESSAGE,
-          message: message})
+  return({type: type.SET_INFO_MESSAGE})
  }
 
 export function setQuiz() { 

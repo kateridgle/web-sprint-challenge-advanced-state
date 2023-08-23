@@ -42,7 +42,7 @@ export function fetchQuiz() {
         dispatch({types: types.SET_QUIZ_INTO_STATE, quiz: res.data})
       })
       .catch(err=>{
-        dispatch({err: err.data})
+        dispatch({err: err.data, message: err.data.message})
       })
     // First, dispatch an action to reset the quiz state (so the "Loading next quiz..." message can display)
     // On successful GET:
@@ -51,6 +51,14 @@ export function fetchQuiz() {
 }
 export function postAnswer() {
   return function (dispatch) {
+    axios.post('http://localhost:9000/api/quiz/new')
+      .then(res =>{
+        dispatch({types: types.SET_SELECTED_ANSWER, message: res.data.message})
+        dispatch(fetchQuiz());
+      })
+      .catch(err =>{
+        dispatch({err: err.data, message: err.data.message})
+      })
     // On successful POST:
     // - Dispatch an action to reset the selected answer state
     // - Dispatch an action to set the server message to state
@@ -59,6 +67,13 @@ export function postAnswer() {
 }
 export function postQuiz() {
   return function (dispatch) {
+    axios.post('http://localhost:9000/api/quiz/new')
+      .then(res=>{
+        dispatch({types:types.SET_INFO_MESSAGE, types: types.RESET_FORM})
+      })
+      .catch(err=>{
+        dispatch({err: err.data, message: err.data.message})
+      })
     // On successful POST:
     // - Dispatch the correct message to the the appropriate state
     // - Dispatch the resetting of the form

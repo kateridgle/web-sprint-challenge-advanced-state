@@ -30,7 +30,7 @@ function selectedAnswer(state = initialSelectedAnswerState, action) {
     case types.SET_SELECTED_ANSWER:
       return {
         ...state,
-        answer: answer,
+        answer: answer
       } //answer or answer selected from quiz.js
     default: 
       return state;

@@ -36,6 +36,14 @@ export function resetForm() {
 // ❗ Async action creators
 export function fetchQuiz() {
   return function (dispatch) {
+    dispatch({types: types.RESET_FORM});
+    axios.get('http://localhost:9000/api/quiz/next')
+      .then(res=>{
+        dispatch({types: types.SET_QUIZ_INTO_STATE, quiz: res.data})
+      })
+      .catch(err=>{
+        dispatch({err: err.data})
+      })
     // First, dispatch an action to reset the quiz state (so the "Loading next quiz..." message can display)
     // On successful GET:
     // - Dispatch an action to send the obtained quiz to its state

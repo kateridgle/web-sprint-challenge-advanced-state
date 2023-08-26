@@ -8,7 +8,7 @@ function wheel(state = initialWheelState, action) {
     case types.MOVE_CLOCKWISE:
       return state + 1 < 6 ? state + 1 : 0
     case types.MOVE_COUNTERCLOCKWISE:
-      return state - 1 > 0 ? state - 1 : 5
+      return state - 1 >= 0 ? state - 1 : 5
     default:
       return state
   }
@@ -20,7 +20,7 @@ function quiz(state = initialQuizState, action) {
     case types.SET_QUIZ_INTO_STATE:
       return {
         ...state,
-        quiz: action.payload.quiz
+        quiz: action.payload.quz
       }
     default:
       return state;

@@ -73,7 +73,7 @@ export function postQuiz(newQuestion, newTrueAnswer, newFalseAnswer) {
   return function (dispatch) {
     axios.post('http://localhost:9000/api/quiz/new')
       .then(res=>{
-        dispatch({types:types.SET_INFO_MESSAGE, types: types.RESET_FORM, })
+        dispatch({types:types.SET_INFO_MESSAGE, types: types.RESET_FORM, payload: {newQuestion, newTrueAnswer, newFalseAnswer} })
       })
       .catch(err=>{
         dispatch({err: err.data, message: err.data.message})

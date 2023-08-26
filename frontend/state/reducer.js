@@ -18,7 +18,7 @@ const initialQuizState = null
 function quiz(state = initialQuizState, action) {
   switch (action.type) {
     case types.SET_QUIZ_INTO_STATE:
-      //look in module 4??
+    //look in module 4??
     default:
       return state;
   }
@@ -29,10 +29,10 @@ function selectedAnswer(state = initialSelectedAnswerState, action) {
   switch (action.type) {
     case types.SET_SELECTED_ANSWER:
       return {
-        ...state,
-        answer: answer
+        quiz: [...state, state.payload]
+
       } //answer or answer selected from quiz.js
-    default: 
+    default:
       return state;
   }
 }
@@ -42,7 +42,8 @@ function infoMessage(state = initialMessageState, action) {
   switch (action.type) {
     case types.SET_INFO_MESSAGE:
       return {
-        message
+       ...state,
+       payload: action.payload.message
       }
     default:
       return state
@@ -60,8 +61,8 @@ function form(state = initialFormState, action) {
     case types.INPUT_CHANGE:
       return {
         ...state,
-        input: value
-      }
+        [action.payload.inputId]: action.payload.value
+      };
     case types.RESET_FORM:
       return initialFormState
     default:

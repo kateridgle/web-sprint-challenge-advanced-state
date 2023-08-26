@@ -1,36 +1,37 @@
 // ❗ You don't need to add extra action creators to achieve MVP
 
 import axios from "axios";
-import {MOVE_CLOCKWISE, MOVE_COUNTERCLOCKWISE, SET_INFO_MESSAGE, SET_SELECTED_ANSWER, SET_QUIZ_INTO_STATE, INPUT_CHANGE, RESET_FORM} from "./action-types";
-
+import * as types from './action-types';
 
 
 export function moveClockwise() {
-  return({type: type.MOVE_CLOCKWISE})
+  return({type: types.MOVE_CLOCKWISE})
  }
 
 export function moveCounterClockwise() {
-  return({type: type.MOVE_COUNTERCLOCKWISE})
+  return({type: types.MOVE_COUNTERCLOCKWISE})
  }
 
 export function selectAnswer() { 
-  return({type: type.SET_SELECTED_ANSWER})
+  return({type: types.SET_SELECTED_ANSWER})
 }
 
 export function setMessage() { //pass payload data as message??
-  return({type: type.SET_INFO_MESSAGE})
+  return({type: types.SET_INFO_MESSAGE})
  }
 
 export function setQuiz() { 
-  return({type: type.SET_QUIZ_INTO_STATE})
+  return({type: types.SET_QUIZ_INTO_STATE})
 }
 
-export function inputChange(value) {
-  return({type: type.INPUT_CHANGE})
+export function inputChange({inputId,value}) {
+  return({type: types.INPUT_CHANGE, 
+  payload: {inputId, value}
+  })
  }
 
 export function resetForm() {
-  return({type: type.RESET_FORM})
+  return({type: types.RESET_FORM})
  }
 // 
 // ❗ Async action creators

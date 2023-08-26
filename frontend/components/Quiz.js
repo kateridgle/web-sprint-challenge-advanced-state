@@ -10,6 +10,7 @@ function Quiz(props) {
 
   useEffect(()=>{
     // if answer submited fetchQuiz();
+    fetchQuiz()
   }, [])
 
   return (

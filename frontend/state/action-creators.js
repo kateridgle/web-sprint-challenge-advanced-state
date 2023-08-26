@@ -12,8 +12,9 @@ export function moveCounterClockwise() {
   return({type: types.MOVE_COUNTERCLOCKWISE})
  }
 
-export function selectAnswer() { 
-  return({type: types.SET_SELECTED_ANSWER})
+export function selectAnswer(inputId) {
+  return({type: types.SET_SELECTED_ANSWER,
+  answer: inputId})
 }
 
 export function setMessage() { //pass payload data as message??

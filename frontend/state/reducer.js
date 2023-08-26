@@ -18,7 +18,10 @@ const initialQuizState = null
 function quiz(state = initialQuizState, action) {
   switch (action.type) {
     case types.SET_QUIZ_INTO_STATE:
-    //look in module 4??
+      return {
+        ...state,
+        quiz: action.payload.quiz
+      }
     default:
       return state;
   }
@@ -29,9 +32,8 @@ function selectedAnswer(state = initialSelectedAnswerState, action) {
   switch (action.type) {
     case types.SET_SELECTED_ANSWER:
       return {
-        quiz: [...state, state.payload]
-
-      } //answer or answer selected from quiz.js
+        answer: action.payload.answerId
+      } 
     default:
       return state;
   }

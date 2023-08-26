@@ -53,7 +53,7 @@ export function fetchQuiz() {
     // - Dispatch an action to send the obtained quiz to its state
   }
 }
-export function postAnswer() {
+export function postAnswer(answerId) {
   return function (dispatch) {
     axios.post('http://localhost:9000/api/quiz/new')
       .then(res =>{
@@ -69,11 +69,11 @@ export function postAnswer() {
     // - Dispatch the fetching of the next quiz
   }
 }
-export function postQuiz() {
+export function postQuiz(newQuestion, newTrueAnswer, newFalseAnswer) {
   return function (dispatch) {
     axios.post('http://localhost:9000/api/quiz/new')
       .then(res=>{
-        dispatch({types:types.SET_INFO_MESSAGE, types: types.RESET_FORM})
+        dispatch({types:types.SET_INFO_MESSAGE, types: types.RESET_FORM, })
       })
       .catch(err=>{
         dispatch({err: err.data, message: err.data.message})

@@ -45,7 +45,7 @@ export function resetForm() {
 }
 // 
 // ❗ Async action creators
-export function fetchQuiz() {
+export function fetchQuiz({question, trueAnswer, falseAnswer}) {
   return function (dispatch) {
     dispatch({ types: types.RESET_FORM });
     axios.get('http://localhost:9000/api/quiz/next')
@@ -60,17 +60,20 @@ export function fetchQuiz() {
     // - Dispatch an action to send the obtained quiz to its state
   }
 }
-export function postAnswer(answerId) {
+export function postAnswer({quizId,answerId}) {
   return function (dispatch) {
-    axios.post('http://localhost:9000/api/quiz/new', {
+    axios.post('http://localhost:9000/api/quiz/answer', {
       message: message,
-      answer: answerId})
+      answer: answerId,
+      quiz: quizId})
       .then(res => {
         dispatch({ types: types.SET_SELECTED_ANSWER, message: res.data.message })
-        dispatch(fetchQuiz());
       })
       .catch(err => {
         dispatch({ err: err.data, message: err.data.message })
+      })
+      .finally(()=>{
+        dispatch(fetchQuiz())
       })
     // On successful POST:
     // - Dispatch an action to reset the selected answer state

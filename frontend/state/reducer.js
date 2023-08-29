@@ -32,7 +32,7 @@ function selectedAnswer(state = initialSelectedAnswerState, action) {
   switch (action.type) {
     case types.SET_SELECTED_ANSWER:
       return {
-        answer: action.payload.answerId
+        answer: action.payload.answer_id
       } 
     default:
       return state;

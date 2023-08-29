@@ -4,9 +4,9 @@ import * as actionCreators from '../state/action-creators'
 
 
 
-function Wheel(props) {
+export function Wheel(props) {
   const {index, moveClockwise, moveCounterClockwise} = props;
-  ;
+  
   return (
     <div id="wrapper">
       <div id="wheel">

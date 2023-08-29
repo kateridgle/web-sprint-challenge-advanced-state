@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import * as actionCreators from '../state/action-creators'
 
-function Message(props) {
+export function Message(props) {
   const { message } = props;
   return <div id="message">{props.message}</div>
   //keep as message ven though wants props. will pass it state

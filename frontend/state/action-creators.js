@@ -71,7 +71,8 @@ export function postAnswer({quizId,answerId}) {
         dispatch({ types: types.SET_SELECTED_ANSWER, message: res.data.message })
       })
       .catch(err => {
-        dispatch({ err: err.data, message: err.data.message })
+        const error = (error = err.data ? err.data : err.message)
+        dispatch(error)
       })
       .finally(()=>{
         dispatch(fetchQuiz())
@@ -93,7 +94,8 @@ export function postQuiz(newQuestion, newTrueAnswer, newFalseAnswer) {
         dispatch({ types: types.SET_INFO_MESSAGE, types: types.RESET_FORM, payload: { newQuestion, newTrueAnswer, newFalseAnswer } })
       })
       .catch(err => {
-        dispatch({ err: err.data, message: err.data.message })
+        const error = (error = err.data ? err.data : err.message)
+        dispatch(error)
       })
     // On successful POST:
     // - Dispatch the correct message to the the appropriate state

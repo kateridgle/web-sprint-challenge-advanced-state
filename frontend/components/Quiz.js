@@ -1,49 +1,60 @@
-import {useEffect, React} from 'react';
+import { useEffect, React } from 'react';
 import * as actionCreators from '../state/action-creators'
 
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 
 
-function Quiz(props) {
-  const {selectAnswer, fetchQuiz, postQuiz, postAnswer, setQuiz}=props;
+export function Quiz(props) {
+  const { selectedAnswer, fetchQuiz, selectAnswer, postAnswer, setQuiz, quiz } = props;
 
-  useEffect(()=>{
+  useEffect(() => {
     // if answer submited fetchQuiz();
     fetchQuiz()
   }, [])
 
   return (
-    <div id="wrapper">
-      {
-        // quiz already in state? Let's use that, otherwise render "Loading next quiz..."
-        true ? (
-          <>
-            <h2>What is a closure?</h2>
+    <div>
+      <div id="wrapper">
+        {
+          // quiz already in state? Let's use that, otherwise render "Loading next quiz..."
+          quiz ? (
+            <>
+              <h2>{quiz.question}</h2>
 
-            <div id="quizAnswers">
-              <div className="answer selected">
-                A function 
-                {/* quiz info as prop to change question? */}
+              <div id="quizAnswers">
+                <div
+                  className={answer${
+                ...selectedAnswer === quiz.answers[0].answer_id ? " selected" : ""
+                  }}
+                onClick={() => selectAnswer(quiz.answers[0].answer_id)}
+                  >
+                {quiz.answers[0].text}
                 <button>
-                  SELECTED
+                  {selectedAnswer === quiz.answers[0].answer_id
+                    ? "SELECTED"
+                    : "Select"}
+                </button>
+                <div
+                  className={answer${
+                ...selectedAnswer === quiz.answers[1].answer_id ? " selected" : ""
+                  }}
+                onClick={() => selectAnswer(quiz.answers[1].answer_id)}
+                >
+                {quiz.answers[1].text}
+                <button>
+                  {selectedAnswer === quiz.answers[1].answer_id
+                    ? "SELECTED"
+                    : "Select"}
                 </button>
               </div>
-              {/* needs to be changed with props. */}
 
-              <div className="answer">
-                An elephant
-                <button>
-                  Select
-                </button>
-              </div>
-            </div>
-
-            <button id="submitAnswerBtn">Submit answer</button>
-          </>
-        ) : 'Loading next quiz...'
-      }
-    </div>
+              <button id="submitAnswerBtn">Submit answer</button>
+            </>
+          ) : 'Loading next quiz...'
+        }
+      </div>
+    </div >
   )
 }
 

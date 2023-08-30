@@ -20,7 +20,7 @@ function quiz(state = initialQuizState, action) {
     case types.SET_QUIZ_INTO_STATE:
       return {
         ...state,
-        quiz: action.payload.quz
+        quiz: action.payload
       }
     default:
       return state;
@@ -32,7 +32,7 @@ function selectedAnswer(state = initialSelectedAnswerState, action) {
   switch (action.type) {
     case types.SET_SELECTED_ANSWER:
       return {
-        answer: action.payload.answer_id
+        answer: action.payload
       } 
     default:
       return state;
@@ -45,7 +45,7 @@ function infoMessage(state = initialMessageState, action) {
     case types.SET_INFO_MESSAGE:
       return {
        ...state,
-       payload: action.payload.message
+       payload: action.payload
       }
     default:
       return state

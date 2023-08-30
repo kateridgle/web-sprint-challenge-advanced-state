@@ -18,10 +18,8 @@ const initialQuizState = null
 function quiz(state = initialQuizState, action) {
   switch (action.type) {
     case types.SET_QUIZ_INTO_STATE:
-      return {
-        ...state,
-        quiz: action.payload
-      }
+      return action.payload
+
     default:
       return state;
   }
@@ -33,7 +31,7 @@ function selectedAnswer(state = initialSelectedAnswerState, action) {
     case types.SET_SELECTED_ANSWER:
       return {
         answer: action.payload
-      } 
+      }
     default:
       return state;
   }
@@ -44,8 +42,8 @@ function infoMessage(state = initialMessageState, action) {
   switch (action.type) {
     case types.SET_INFO_MESSAGE:
       return {
-       ...state,
-       payload: action.payload
+        ...state,
+        payload: action.payload
       }
     default:
       return state

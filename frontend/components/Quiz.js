@@ -23,7 +23,7 @@ export function Quiz(props) {
 
             <div id="quizAnswers">
               <div
-                className={answer`${selectedAnswer === quiz.answers[0].answer_id ? " selected" : ""
+                className={`answer${selectedAnswer === quiz.answers[0].answer_id ? " selected" : ""
                   }`}
                 onClick={() => selectAnswer(quiz.answers[0].answer_id)}>
                 {quiz.answers[0].text}
@@ -34,12 +34,11 @@ export function Quiz(props) {
                     : "Select"}
                 </button>
                 <div
-                  className={answer`${selectedAnswer === quiz.answers[1].answer_id ? " selected" : ""
+                  className={`answer${selectedAnswer === quiz.answers[1].answer_id ? " selected" : ""
                     }`}
-                  onClick={() => selectAnswer(quiz.answers[1].answer_id)}
-                >
-                </div>
+                  onClick={() => selectAnswer(quiz.answers[1].answer_id)}>
                 {quiz.answers[1].text}
+                </div>
                 <button>
                   {selectedAnswer === quiz.answers[1].answer_id
                     ? "SELECTED"
@@ -48,7 +47,7 @@ export function Quiz(props) {
               </div>
             </div>
 
-            <button onClick={() => postAnswer({quiz,selectedAnswer})} disabled={!selectedAnswer} id="submitAnswerBtn">Submit answer</button>
+            <button onClick={() => postAnswer({ quiz: quiz.quiz_id, answer: selectedAnswer })} disabled={!selectedAnswer} id="submitAnswerBtn">Submit answer</button>
           </div>
         ) : ('Loading next quiz...')
       }

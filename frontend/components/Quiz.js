@@ -33,12 +33,13 @@ export function Quiz(props) {
                     ? "SELECTED"
                     : "Select"}
                 </button>
-                <div
-                  className={`answer${selectedAnswer === quiz.answers[1].answer_id ? " selected" : ""
-                    }`}
-                  onClick={() => selectAnswer(quiz.answers[1].answer_id)}>
+              </div>
+              <div
+                className={`answer${selectedAnswer === quiz.answers[1].answer_id ? " selected" : ""
+                  }`}
+                onClick={() => selectAnswer(quiz.answers[1].answer_id)}>
                 {quiz.answers[1].text}
-                </div>
+
                 <button>
                   {selectedAnswer === quiz.answers[1].answer_id
                     ? "SELECTED"

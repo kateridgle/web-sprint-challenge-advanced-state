@@ -4,9 +4,10 @@ import * as actionCreators from '../state/action-creators'
 
 
 export function Form(props) {
-  const { inputChange, resetForm, postQuiz, form } = props;
+  const { inputChange, resetForm, postQuiz, form, value } = props;
 
   const onChange = (evt) => {
+    console.log(value)
     inputChange({ inputId: value });
   };
 

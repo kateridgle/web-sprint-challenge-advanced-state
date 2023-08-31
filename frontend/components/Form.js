@@ -7,7 +7,7 @@ export function Form(props) {
   const { inputChange, resetForm, postQuiz, form } = props;
 
   const onChange = (evt) => {
-    inputChange({ inputId, value });
+    inputChange({ inputId: value });
   };
 
   const onSubmit = (evt) => {

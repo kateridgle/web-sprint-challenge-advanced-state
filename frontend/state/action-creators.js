@@ -53,28 +53,27 @@ export function fetchQuiz() {
         dispatch(setQuiz(res.data))
       })
       .catch(err => {
-        const error = (error = err.data ? err.data : err.message)
-        dispatch(error)
+        const errormsg = (err.response ? err.response.data.message : err.message)
+        dispatch(errormsg)
       })
     // First, dispatch an action to reset the quiz state (so the "Loading next quiz..." message can display)
     // On successful GET:
     // - Dispatch an action to send the obtained quiz to its state
   }
 }
-export function postAnswer({quizId,answerId}) {
+export function postAnswer({ quiz_Id, answer_Id }) {
   return function (dispatch) {
-    axios.post('http://localhost:9000/api/quiz/answer', {
-      message: message,
-      answer: answerId,
-      quiz: quizId})
+    axios.post('http://localhost:9000/api/quiz/answer',
+      { quiz_Id, answer_Id })
       .then(res => {
-        dispatch({ types: types.SET_SELECTED_ANSWER, message: res.data.message })
+        dispatch(selectAnswer(null))
+        dispatch(setMessage(res.data.message))
       })
       .catch(err => {
-        const error = (error = err.data ? err.data : err.message)
-        dispatch(error)
+        const errormsg = (err.response ? err.response.data.message : err.message)
+        dispatch(errormsg)
       })
-      .finally(()=>{
+      .finally(() => {
         dispatch(fetchQuiz())
       })
     // On successful POST:
@@ -91,11 +90,11 @@ export function postQuiz(newQuestion, newTrueAnswer, newFalseAnswer) {
       falseAnswer: newFalseAnswer,
     })
       .then(res => {
-        dispatch({ types: types.SET_INFO_MESSAGE, types: types.RESET_FORM, payload: { newQuestion, newTrueAnswer, newFalseAnswer } })
+        dispatch({ types: types.SET_INFO_MESSAGE, types: types.RESET_FORM, newQuestion, newTrueAnswer, newFalseAnswer })
       })
       .catch(err => {
-        const error = (error = err.data ? err.data : err.message)
-        dispatch(error)
+        const errormsg = (err.response ? err.response.data.message : err.message)
+        dispatch(errormsg)
       })
     // On successful POST:
     // - Dispatch the correct message to the the appropriate state

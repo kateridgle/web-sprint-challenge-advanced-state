@@ -4,22 +4,17 @@ import * as actionCreators from '../state/action-creators'
 
 
 export function Form(props) {
-  const {dispatch, inputChange, resetForm, value, inputId} = props;
+  const { inputChange, resetForm, postQuiz, form } = props;
 
-  const onChange = evt => {
-    inputChange(inputId, value)
+  const onChange = (evt) => {
+    inputChange({ inputId, value });
+  };
 
-  }
-
-  const onSubmit = evt => {
+  const onSubmit = (evt) => {
     evt.preventDefault();
-    actionCreators.postAnswer();
-    actionCreators.postQuiz();
+    postQuiz(form.newQuestion, form.newTrueAnswer, form.newFalseAnswer);
     resetForm();
-    //post newform to quiz ?dispatch?
-    //resetForm()
-
-  }
+  };
 
   return (
     <form id="form" onSubmit={onSubmit}>

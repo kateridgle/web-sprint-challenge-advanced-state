@@ -1,4 +1,4 @@
-import { useEffect, React } from 'react';
+import React, { useEffect } from 'react';
 import * as actionCreators from '../state/action-creators'
 
 import { connect } from 'react-redux';
@@ -6,10 +6,9 @@ import { connect } from 'react-redux';
 
 
 export function Quiz(props) {
-  const { selectedAnswer, fetchQuiz, selectAnswer, postAnswer, setQuiz, quiz } = props;
+  const { selectedAnswer, fetchQuiz, selectAnswer, postAnswer, quiz } = props;
 
   useEffect(() => {
-    // if answer submited fetchQuiz();
     !quiz && fetchQuiz()
   }, [])
 
@@ -18,7 +17,7 @@ export function Quiz(props) {
       {
         // quiz already in state? Let's use that, otherwise render "Loading next quiz..."
         quiz ? (
-          <div>
+          <>
             <h2>{quiz.question}</h2>
 
             <div id="quizAnswers">
@@ -49,11 +48,11 @@ export function Quiz(props) {
             </div>
 
             <button onClick={() => postAnswer({ quiz: quiz.quiz_id, answer: selectedAnswer })} disabled={!selectedAnswer} id="submitAnswerBtn">Submit answer</button>
-          </div>
+          </>
         ) : ('Loading next quiz...')
       }
     </div>
-  )
+  );
 }
 
 

@@ -21,8 +21,8 @@ export function Wheel(props) {
         <div className="cog" style={{ "--i": 5 }}>{wheel}</div>{/* --i is a custom CSS property, no need to touch that nor the style object */}
       </div>
       <div id="keypad">
-        <button onClick={moveCounterClockwise} id="counterClockwiseBtn" >Counter clockwise</button>
-        <button onClick={moveClockwise} id="clockwiseBtn">Clockwise</button>
+        <button onClick={()=>{moveCounterClockwise()}} id="counterClockwiseBtn" >Counter clockwise</button>
+        <button onClick={() =>{moveClockwise()}} id="clockwiseBtn">Clockwise</button>
       </div>
     </div>
   )

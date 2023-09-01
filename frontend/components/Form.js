@@ -24,9 +24,9 @@ export function Form(props) {
   return (
     <form id="form" onSubmit={onSubmit}>
       <h2>Create New Quiz</h2>
-      <input maxLength={50} onChange={onChange} value={value} id="newQuestion" placeholder="Enter question" />
-      <input maxLength={50} onChange={onChange} value={value} id="newTrueAnswer" placeholder="Enter true answer" />
-      <input maxLength={50} onChange={onChange} value={value} id="newFalseAnswer" placeholder="Enter false answer" />
+      <input maxLength={50} onChange={onChange} value={form.value} id="newQuestion" placeholder="Enter question" />
+      <input maxLength={50} onChange={onChange} value={form.value} id="newTrueAnswer" placeholder="Enter true answer" />
+      <input maxLength={50} onChange={onChange} value={form.value} id="newFalseAnswer" placeholder="Enter false answer" />
       <button id="submitNewQuizBtn">Submit new quiz</button>
     </form>
   )

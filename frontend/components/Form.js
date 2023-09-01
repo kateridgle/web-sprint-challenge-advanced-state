@@ -4,7 +4,7 @@ import * as actionCreators from '../state/action-creators'
 
 
 export function Form(props) {
-  const { inputChange, resetForm, postQuiz, form, value } = props;
+  const { inputChange, postQuiz, form, value, resetForm } = props;
 
   const onChange = (evt) => {
     console.log(value)
@@ -13,16 +13,20 @@ export function Form(props) {
 
   const onSubmit = (evt) => {
     evt.preventDefault();
-    postQuiz(form.newQuestion, form.newTrueAnswer, form.newFalseAnswer);
+    postQuiz({
+      question_text: newQuestion,
+      true_answer_text: newTrueAnswer,
+      false_answer_text: newFalseAnswer,
+    });
     resetForm();
   };
 
   return (
     <form id="form" onSubmit={onSubmit}>
       <h2>Create New Quiz</h2>
-      <input maxLength={50} onChange={onChange} id="newQuestion" placeholder="Enter question" />
-      <input maxLength={50} onChange={onChange} id="newTrueAnswer" placeholder="Enter true answer" />
-      <input maxLength={50} onChange={onChange} id="newFalseAnswer" placeholder="Enter false answer" />
+      <input maxLength={50} onChange={onChange} value={value} id="newQuestion" placeholder="Enter question" />
+      <input maxLength={50} onChange={onChange} value={value} id="newTrueAnswer" placeholder="Enter true answer" />
+      <input maxLength={50} onChange={onChange} value={value} id="newFalseAnswer" placeholder="Enter false answer" />
       <button id="submitNewQuizBtn">Submit new quiz</button>
     </form>
   )

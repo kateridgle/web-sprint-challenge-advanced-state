@@ -4,18 +4,18 @@ import axios from "axios";
 import * as types from './action-types';
 
 
-export function moveClockwise() {
-  return ({ type: types.MOVE_CLOCKWISE })
+export function moveClockwise(value) {
+  return ({ type: types.MOVE_CLOCKWISE, payload: value })
 }
 
-export function moveCounterClockwise() {
-  return ({ type: types.MOVE_COUNTERCLOCKWISE })
+export function moveCounterClockwise(value) {
+  return ({ type: types.MOVE_COUNTERCLOCKWISE, payload: value })
 }
 
-export function selectAnswer(answerId) {
+export function selectAnswer(answer_Id) {
   return ({
     type: types.SET_SELECTED_ANSWER,
-    payload: answerId
+    payload: answer_Id
   })
 }
 
@@ -54,7 +54,7 @@ export function fetchQuiz() {
       })
       .catch(err => {
         const errormsg = (err.response ? err.response.data.message : err.message)
-        dispatch(errormsg)
+        dispatch(setMessage(errormsg))
       })
     // First, dispatch an action to reset the quiz state (so the "Loading next quiz..." message can display)
     // On successful GET:
@@ -63,15 +63,15 @@ export function fetchQuiz() {
 }
 export function postAnswer({ quiz_Id, answer_Id }) {
   return function (dispatch) {
-    axios.post('http://localhost:9000/api/quiz/answer',
-      { quiz_Id, answer_Id })
+    axios.post('http://localhost:9000/api/quiz/answer', { quiz_Id, answer_Id })
       .then(res => {
-        dispatch(selectAnswer(null))
+        dispatch(selectAnswer(answer_Id))
+        dispatch(setQuiz(null))
         dispatch(setMessage(res.data.message))
       })
       .catch(err => {
         const errormsg = (err.response ? err.response.data.message : err.message)
-        dispatch(errormsg)
+        dispatch(setMessage(errormsg))
       })
       .finally(() => {
         dispatch(fetchQuiz())
@@ -85,16 +85,16 @@ export function postAnswer({ quiz_Id, answer_Id }) {
 export function postQuiz(newQuestion, newTrueAnswer, newFalseAnswer) {
   return function (dispatch) {
     axios.post('http://localhost:9000/api/quiz/new', {
-      question: newQuestion,
-      trueAnswer: newTrueAnswer,
-      falseAnswer: newFalseAnswer,
+      question_text: newQuestion,
+      true_answer_text: newTrueAnswer,
+      false_answer_text: newFalseAnswer,
     })
       .then(res => {
         dispatch({ types: types.SET_INFO_MESSAGE, types: types.RESET_FORM, newQuestion, newTrueAnswer, newFalseAnswer })
       })
       .catch(err => {
         const errormsg = (err.response ? err.response.data.message : err.message)
-        dispatch(errormsg)
+        dispatch(setMessage(errormsg))
       })
     // On successful POST:
     // - Dispatch the correct message to the the appropriate state

@@ -12,10 +12,10 @@ export function moveCounterClockwise(value) {
   return ({ type: types.MOVE_COUNTERCLOCKWISE, payload: value })
 }
 
-export function selectAnswer(answer_Id) {
+export function selectAnswer(answerId) {
   return ({
     type: types.SET_SELECTED_ANSWER,
-    payload: answer_Id
+    payload: answerId
   })
 }
 
@@ -33,11 +33,8 @@ export function setQuiz(quiz) {
   })
 }
 
-export function inputChange({ inputId, value }) {
-  return ({
-    type: types.INPUT_CHANGE,
-    payload: { inputId, value }
-  })
+export function inputChange(inputId, value) {
+  return { type: types.INPUT_CHANGE, payload: [inputId, value]}
 }
 
 export function resetForm() {
@@ -61,40 +58,32 @@ export function fetchQuiz() {
     // - Dispatch an action to send the obtained quiz to its state
   }
 }
-export function postAnswer({ quiz_Id, answer_Id }) {
+export function postAnswer(quiz_id, answer_id) {
   return function (dispatch) {
-    axios.post('http://localhost:9000/api/quiz/answer', { quiz_Id, answer_Id })
+    axios
+      .post('http://localhost:9000/api/quiz/answer', { quiz_id, answer_id })
       .then(res => {
-        dispatch(selectAnswer(answer_Id))
-        dispatch(setQuiz(null))
-        dispatch(setMessage(res.data.message))
+        dispatch({ type: types.SET_SELECTED_ANSWER, payload: null })
+        dispatch({ type: types.SET_INFO_MESSAGE, payload: res.data.message })
+        fetchQuiz()(dispatch)
       })
-      .catch(err => {
-        const errormsg = (err.response ? err.response.data.message : err.message)
-        dispatch(setMessage(errormsg))
-      })
-      .finally(() => {
-        dispatch(fetchQuiz())
-      })
+    // `{ "quiz_id": "LVqUh", "answer_id": "0VEv0" }`
     // On successful POST:
     // - Dispatch an action to reset the selected answer state
     // - Dispatch an action to set the server message to state
     // - Dispatch the fetching of the next quiz
   }
 }
-export function postQuiz(newQuestion, newTrueAnswer, newFalseAnswer) {
+export function postQuiz({newQuestion, newTrueAnswer, newFalseAnswer}) {
   return function (dispatch) {
-    axios.post('http://localhost:9000/api/quiz/new', {
-      question_text: newQuestion,
-      true_answer_text: newTrueAnswer,
-      false_answer_text: newFalseAnswer,
-    })
+    axios.post('http://localhost:9000/api/quiz/new', { newQuestion, newTrueAnswer, newFalseAnswer})
       .then(res => {
-        dispatch({ types: types.SET_INFO_MESSAGE, types: types.RESET_FORM, newQuestion, newTrueAnswer, newFalseAnswer })
+        dispatch({type: types.RESET_FORM})
+        dispatch(setMessage(`Congrats: "${res.data.question}" is a great question!`))
+        
       })
       .catch(err => {
-        const errormsg = (err.response ? err.response.data.message : err.message)
-        dispatch(setMessage(errormsg))
+        console.error(err)
       })
     // On successful POST:
     // - Dispatch the correct message to the the appropriate state

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import * as actionCreators from '../state/action-creators'
+import { fetchQuiz, selectAnswer, postAnswer } from '../state/action-creators';
 
 import { connect } from 'react-redux';
 
@@ -15,45 +15,43 @@ export function Quiz(props) {
   return (
     <div id="wrapper">
       {
-        // quiz already in state? Let's use that, otherwise render "Loading next quiz..."
-        quiz ? (
-          <>
-            <h2>{quiz.question}</h2>
+        // is the quiz already in state? Let's use that, otherwise render "Loading next quiz..."
+        quiz
+          ? (
+            <>
+              <h2>{quiz.question}</h2>
 
-            <div id="quizAnswers">
-              <div
-                className={`answer${selectedAnswer === quiz.answers[0].answer_id ? " selected" : ""
-                  }`}
-                onClick={() => selectAnswer(quiz.answers[0].answer_id)}>
-                {quiz.answers[0].text}
+              <div id="quizAnswers">
+                <div className={`answer ${selectedAnswer === quiz.answers[0].answer_id ? `selected` : null}`}>
+                  {quiz.answers[0].text}
 
-                <button>
-                  {selectedAnswer === quiz.answers[0].answer_id
-                    ? "SELECTED"
-                    : "Select"}
-                </button>
+                  <button onClick={() => selectAnswer(quiz.answers[0].answer_id)}>
+                    {selectedAnswer === quiz.answers[0].answer_id ? `SELECTED` : `Select`}
+                  </button>
+                </div>
+
+                <div className={`answer ${selectedAnswer === quiz.answers[1].answer_id ? `selected` : null}`}>
+                  {quiz.answers[1].text}
+                  <button onClick={() => selectAnswer(quiz.answers[1].answer_id)} >
+                    {selectedAnswer === quiz.answers[1].answer_id ? `SELECTED` : `Select`}
+                  </button>
+                </div>
               </div>
-              <div
-                className={`answer${selectedAnswer === quiz.answers[1].answer_id ? " selected" : ""
-                  }`}
-                onClick={() => selectAnswer(quiz.answers[1].answer_id)}>
-                {quiz.answers[1].text}
 
-                <button>
-                  {selectedAnswer === quiz.answers[1].answer_id
-                    ? "SELECTED"
-                    : "Select"}
-                </button>
-              </div>
-            </div>
-
-            <button onClick={() => postAnswer({ quiz: quiz.quiz_id, answer: selectedAnswer })} disabled={!selectedAnswer} id="submitAnswerBtn">Submit answer</button>
-          </>
-        ) : ('Loading next quiz...')
+              <button disabled={!selectedAnswer} id="submitAnswerBtn" onClick={() => postAnswer(quiz.quiz_id, selectedAnswer)}>Submit answer</button>
+            </>
+          ) : 'Loading next quiz...'
       }
     </div>
-  );
+  )
+}
+
+const mapStateToProps = (state) => {
+  return {
+    quiz: state.quiz,
+    selectedAnswer: state.selectedAnswer
+  };
 }
 
 
-export default connect(st => st, actionCreators)(Quiz)
+export default connect(mapStateToProps, { fetchQuiz, selectAnswer, postAnswer })(Quiz)

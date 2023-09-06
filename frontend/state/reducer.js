@@ -41,6 +41,8 @@ function infoMessage(state = initialMessageState, action) {
   switch (action.type) {
     case types.SET_INFO_MESSAGE:
       return action.payload
+    case types.SET_SELECTED_ANSWER:
+      return ""
 
     default:
       return state

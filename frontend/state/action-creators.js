@@ -66,8 +66,14 @@ export function postAnswer(quiz_id, answer_id) {
       .then(res => {
         dispatch({ type: types.SET_SELECTED_ANSWER, payload: null })
         dispatch({ type: types.SET_INFO_MESSAGE, payload: res.data.message })
-        fetchQuiz()(dispatch)
       })
+      .catch(err => {
+        const errormsg = (err.response ? err.response.data.message : err.message)
+        dispatch(setMessage(errormsg))
+      })
+      .finally(
+        dispatch(fetchQuiz(dispatch))
+      )
     // `{ "quiz_id": "LVqUh", "answer_id": "0VEv0" }`
     // On successful POST:
     // - Dispatch an action to reset the selected answer state
@@ -80,12 +86,15 @@ export function postQuiz(newQuestion, newTrueAnswer, newFalseAnswer) {
     axios.post('http://localhost:9000/api/quiz/new', { question_text: newQuestion, true_answer_text: newTrueAnswer, false_answer_text: newFalseAnswer})
       .then(res => {
         dispatch(setMessage(`Congrats: "${res.data.question}" is a great question!`))
-        dispatch({type: types.RESET_FORM})
         
       })
       .catch(err => {
-        console.error(err)
+        const errormsg = (err.response ? err.response.data.message : err.message)
+        dispatch(setMessage(errormsg))
       })
+      .finally(
+        dispatch(resetForm(dispatch))
+      )
     // On successful POST:
     // - Dispatch the correct message to the the appropriate state
     // - Dispatch the resetting of the form

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { fetchQuiz, selectAnswer, postAnswer } from '../state/action-creators';
+import * as actionCreators from "../state/action-creators";
 
 import { connect } from 'react-redux';
 
@@ -46,12 +46,5 @@ export function Quiz(props) {
   )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    quiz: state.quiz,
-    selectedAnswer: state.selectedAnswer
-  };
-}
 
-
-export default connect(mapStateToProps, { fetchQuiz, selectAnswer, postAnswer })(Quiz)
+export default connect((st) => st, actionCreators)(Quiz);

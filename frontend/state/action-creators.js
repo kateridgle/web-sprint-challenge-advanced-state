@@ -34,7 +34,8 @@ export function setQuiz(quiz) {
 }
 
 export function inputChange(inputId, value) {
-  return { type: types.INPUT_CHANGE, payload: [inputId, value]}
+  return ( {type: types.INPUT_CHANGE, payload: {inputId, value}}
+  )
 }
 
 export function resetForm() {

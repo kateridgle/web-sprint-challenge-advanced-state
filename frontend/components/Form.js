@@ -8,7 +8,7 @@ export function Form(props) {
 
   const onChange = (evt) => {
     const { id, value } = evt.target
-    inputChange({ inputId: id, value })
+    inputChange( id, value )
   };
 
   const onSubmit = (evt) => {
@@ -16,7 +16,7 @@ export function Form(props) {
     postQuiz(form);
   };
 
-  const setDisabled = () => {form.newQuestion.trim().length > 1 && form.newTrueAnswer.trim().length > 1 && form.newFalseAnswer.trim().length > 1 ? false : true};
+  const setDisabled = () => Object.values(form).some(value => !value.trim().length);
 
   return (
     <form id="form" onSubmit={(evt) => onSubmit(evt)}>

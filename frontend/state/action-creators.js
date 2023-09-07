@@ -66,14 +66,15 @@ export function postAnswer(quiz_id, answer_id) {
       .then(res => {
         dispatch({ type: types.SET_SELECTED_ANSWER, payload: null })
         dispatch({ type: types.SET_INFO_MESSAGE, payload: res.data.message })
+        dispatch(fetchQuiz(dispatch))
       })
       .catch(err => {
         const errormsg = (err.response ? err.response.data.message : err.message)
         dispatch(setMessage(errormsg))
+        
       })
-      .finally(
-        dispatch(fetchQuiz(dispatch))
-      )
+        
+      
     // `{ "quiz_id": "LVqUh", "answer_id": "0VEv0" }`
     // On successful POST:
     // - Dispatch an action to reset the selected answer state
@@ -93,7 +94,7 @@ export function postQuiz({newQuestion, newTrueAnswer, newFalseAnswer}) {
         dispatch(setMessage(errormsg))
       })
       .finally(
-        dispatch(resetForm(dispatch))
+        dispatch(resetForm())
       )
     // On successful POST:
     // - Dispatch the correct message to the the appropriate state
